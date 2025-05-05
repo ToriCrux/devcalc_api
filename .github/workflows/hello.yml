@@ -1,0 +1,14 @@
+name: Primeiro Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  hello_job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Exibir mensagem
+        run: echo "Pipeline - Iniciado com Sucesso"
