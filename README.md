@@ -14,4 +14,4 @@ Essa API, faz parte de um exercício para prática de CI/CD com o GitHub Actions
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/SEU_USUARIO/devcalc-api.git
+   git clone https://github.com/ToriCrux/devcalc_api.git
