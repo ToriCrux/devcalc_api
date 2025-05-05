@@ -21,13 +21,13 @@ jobs:
       - name: Checkout Código
         uses: actions/checkout@v3
 
-      - name: Instalar Java
+      - name: Setup Java
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
           java-version: '21'
+          distribution: 'temurin'
 
-      - name: Build com Maven
+      - name: Build do projeto
         run: mvn clean install
 
   test:
@@ -37,11 +37,34 @@ jobs:
       - name: Checkout Código
         uses: actions/checkout@v3
 
-      - name: Instalar Java
+      - name: Setup Java
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
           java-version: '21'
+          distribution: 'temurin'
 
-      - name: Rodar Testes
+      - name: Executar Testes
         run: mvn test
+
+  package:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Checkout Código
+        uses: actions/checkout@v3
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Gerar pacote JAR
+        run: mvn package
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [package]
+    steps:
+      - name: Mensagem de Deploy
+        run: echo "Deploy realizado com SUCESSO!"
