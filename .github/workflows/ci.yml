@@ -23,11 +23,11 @@ jobs:
 
       - name: Build com Maven
         run: mvn clean install
-        working-directory: ./devcalc-api
+        working-directory: ./devcalc_api
 
       - name: Executar Testes
         run: mvn test
-        working-directory: ./devcalc-api
+        working-directory: ./devcalc_api
 
   package:
     runs-on: ubuntu-latest
@@ -44,7 +44,7 @@ jobs:
 
       - name: Empacotar aplicação
         run: mvn package
-        working-directory: ./devcalc-api
+        working-directory: ./devcalc_api
 
   deploy:
     runs-on: ubuntu-latest
@@ -67,8 +67,8 @@ jobs:
 
       - name: Instalar dependências do Checkstyle
         run: mvn install -DskipTests
-        working-directory: ./devcalc-api
+        working-directory: ./devcalc_api
 
       - name: Executar Checkstyle
         run: mvn checkstyle:checkstyle
-        working-directory: ./devcalc-api
+        working-directory: ./devcalc_api
