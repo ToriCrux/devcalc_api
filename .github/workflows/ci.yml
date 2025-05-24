@@ -38,7 +38,7 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '21'
-      - run: mvn tset
+      - run: mvn test
 
   package:
     runs-on: ubuntu-latest
