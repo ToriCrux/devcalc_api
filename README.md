@@ -26,6 +26,8 @@ Após fazer o push da alteração, acessei a aba **Actions** no GitHub e identif
 
 Com isso, reverti a alteração para o comando correto e confirmei a correção ao observar que o pipeline foi executado com sucesso na nova tentativa.
 
+
 ## 📊 Observação sobre Gatilhos e Monitoramento
 
 Para validar o monitoramento do pipeline, configurei um status badge que exibe visualmente o resultado da última execução do workflow principal. Realizei duas execuções distintas: uma automática, disparada por push na branch, e outra manual, utilizando o botão "Run workflow" na interface do GitHub Actions. Notei que, na execução por push, o pipeline roda automaticamente assim que há uma alteração no repositório, enquanto na execução manual posso escolher parâmetros específicos e acionar o workflow sob demanda. Essa flexibilidade permite testar cenários diferentes e controlar melhor o fluxo de CI/CD no projeto.
+
