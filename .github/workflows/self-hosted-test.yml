@@ -13,8 +13,5 @@ jobs:
       - name: Exibir versão do Java
         run: java -version
 
-      - name: Instalar curl com Chocolatey
-        run: choco install curl -y
-
-      - name: Testar curl
-        run: curl --version
+      - name: Testar comando PowerShell simples
+        run: Get-Date
