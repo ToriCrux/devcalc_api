@@ -8,7 +8,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Exibir sistema operacional
-        run: ver
+        run: systeminfo
 
       - name: Exibir versão do Java
         run: java -version
