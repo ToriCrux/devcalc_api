@@ -1,0 +1,20 @@
+name: Teste Runner Local
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-local:
+    runs-on: self-hosted
+    steps:
+      - name: Exibir sistema operacional
+        run: ver
+
+      - name: Exibir versão do Java
+        run: java -version
+
+      - name: Instalar curl com Chocolatey
+        run: choco install curl -y
+
+      - name: Testar curl
+        run: curl --version
