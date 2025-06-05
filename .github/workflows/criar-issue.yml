@@ -1,0 +1,46 @@
+name: Alerta Automático por Falta de Variável
+
+on:
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+env:
+  ENVIRONMENT: "" 
+
+jobs:
+  verificar-e-notificar:
+    runs-on: self-hosted
+
+    defaults:
+      run:
+        shell: pwsh
+
+    steps:
+      - name: Checar valor da ENVIRONMENT
+        run: |
+          if ($env:ENVIRONMENT -eq "") {
+            Write-Output "A variável ENVIRONMENT está vazia ou indefinida."
+          } else {
+            Write-Output "ENVIRONMENT detectada: $env:ENVIRONMENT"
+          }
+
+      - name: Abrir issue se ENVIRONMENT estiver ausente
+        if: ${{ env.ENVIRONMENT == '' }}
+        run: |
+          $headers = @{
+            Authorization = "Bearer ${{ secrets.GITHUB_TOKEN }}"
+            Accept        = "application/vnd.github+json"
+          }
+
+          $issueData = @{
+            title = "Variável ausente no ambiente"
+            body  = "O workflow identificou que a variável ENVIRONMENT não foi configurada. Por favor, revise a configuração antes do próximo deploy."
+          } | ConvertTo-Json -Depth 2
+
+          Invoke-RestMethod -Uri "https://api.github.com/repos/${{ github.repository }}/issues" `
+                            -Method POST `
+                            -Headers $headers `
+                            -Body $issueData `
+                            -ContentType "application/json"
