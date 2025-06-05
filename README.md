@@ -33,3 +33,41 @@ Para validar o monitoramento do pipeline, configurei um status badge que exibe v
 
 Notei que, na execução por push, o pipeline roda automaticamente assim que há uma alteração no repositório, enquanto na execução manual posso escolher parâmetros específicos e acionar o workflow sob demanda. Essa flexibilidade permite testar cenários diferentes e controlar melhor o fluxo de CI/CD no projeto.
 
+---
+
+## 📚 TP3 – Teste de Performance: Controle, Segurança e Ambientes no CI/CD
+
+Como parte do terceiro Teste de Performance da disciplina, o projeto DevCalc foi evoluído com foco em segurança, ambientes separados de deploy e novos recursos de personalização nos pipelines. Abaixo, um resumo das etapas realizadas:
+
+### ✅ Etapa 1 – Runner Auto-Hospedado
+Foi configurado um runner local no sistema operacional Windows, conectado ao repositório DevCalc, com execução de comandos básicos para validar a personalização do ambiente. 
+
+### ✅ Etapa 2 – Uso de Variáveis e Secrets
+Variáveis não sensíveis (`APP_MODE`, `SUPPORT_EMAIL`) e um segredo sensível (`PROD_TOKEN`) foram adicionados no GitHub e utilizados no workflow `variaveis-secrets.yml`. O acesso foi feito via os contextos `vars.NOME` e `secrets.NOME`.
+
+### ✅ Etapa 3 – Contextos e Escopos de Variáveis
+Demonstrou-se o comportamento de variáveis definidas em nível de workflow, job e step. Também foram exibidas informações como `github.actor` e `runner.os`, validando a sobreposição e hierarquia das variáveis de ambiente.
+
+### ✅ Etapa 4 – GITHUB_TOKEN e Controle de Permissões
+Foi criado um workflow que simula a ausência de uma variável obrigatória e, se detectado, cria automaticamente uma issue no repositório utilizando o `GITHUB_TOKEN`, com permissão configurada para `issues: write`.
+
+### ✅ Etapa 5 – Ambientes Separados de Deploy (dev e prod)
+Ambientes `dev` (liberação automática) e `prod` (com aprovação manual) foram configurados no GitHub. O workflow `deploy.yml` realiza deploy para `dev` via push na branch `dev`, e para `prod` via push na branch `main`, exigindo aprovação antes da execução.
+
+### ✅ Etapa 6 – Nova Funcionalidade: Raiz Quadrada
+Foi implementado um novo endpoint `GET /sqrt?x=valor`, que retorna a raiz quadrada do número informado. A função foi adicionada ao serviço e testada com sucesso, incluindo testes automatizados que validam entradas positivas e negativas. O pipeline de CI foi executado com todos os testes passando.
+
+---
+
+### ⚙️ Como Executar os Workflows do TP3
+
+| Nome do Workflow             | Disparo                             | Caminho no Projeto                                |
+|-----------------------------|--------------------------------------|---------------------------------------------------|
+| `runner-local.yml`          | Manual (via "Run workflow")          | `.github/workflows/runner-local.yml`              |
+| `variaveis-secrets.yml`     | Manual                               | `.github/workflows/variaveis-secrets.yml`         |
+| `env-context-demo.yml`      | Manual                               | `.github/workflows/env-context-demo.yml`          |
+| `alerta-variavel.yml`       | Manual                               | `.github/workflows/alerta-variavel.yml`           |
+| `deploy.yml`                | Push (`dev` ou `main`)               | `.github/workflows/deploy.yml`                    |
+| `ci.yml` (pipeline principal) | Push/pull request                    | `.github/workflows/ci.yml`                        |
+
+Todos os workflows podem ser reexecutados pela aba **Actions**.
