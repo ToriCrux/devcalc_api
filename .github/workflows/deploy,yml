@@ -1,0 +1,50 @@
+name: Pipeline de Deploy Automatizado
+
+on:
+  push:
+    branches:
+      - dev
+      - main
+
+jobs:
+  deploy-ambiente-dev:
+    if: github.ref == 'refs/heads/dev'
+    runs-on: self-hosted
+    environment:
+      name: dev
+    defaults:
+      run:
+        shell: powershell
+
+    steps:
+      - name: Informações de execução
+        run: |
+          Write-Output " Executado por: ${{ github.actor }}"
+          Write-Output "Sistema operacional: ${{ runner.os }}"
+
+      - name: Deploy para ambiente DEV
+        run: |
+          Write-Output "Iniciando publicação em ambiente de desenvolvimento"
+          Write-Output "ENV_TYPE (dev): ${{ vars.ENV_TYPE }}"
+          Write-Output "Deploy DEV Concluído"
+
+  deploy-ambiente-prod:
+    if: github.ref == 'refs/heads/main'
+    runs-on: self-hosted
+    environment:
+      name: prod
+    defaults:
+      run:
+        shell: powershell
+
+    steps:
+      - name: Informações de execução
+        run: |
+          Write-Output "🔧 Executado por: ${{ github.actor }}"
+          Write-Output "🖥️ Sistema operacional: ${{ runner.os }}"
+
+      - name: Deploy para ambiente PROD
+        run: |
+          Write-Output "Iniciando processo de publicação em produção"
+          Write-Output "Token de acesso: ${{ secrets.PROD_KEY }}"
+          Write-Output "Aguardando confirmação para finalizar deploy PROD"
