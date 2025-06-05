@@ -7,7 +7,7 @@ permissions:
   issues: write
 
 env:
-  ENVIRONMENT: "" 
+  ENVIRONMENT: ""
 
 jobs:
   verificar-e-notificar:
@@ -15,7 +15,7 @@ jobs:
 
     defaults:
       run:
-        shell: pwsh
+        shell: powershell
 
     steps:
       - name: Checar valor da ENVIRONMENT
