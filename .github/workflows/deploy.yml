@@ -19,14 +19,14 @@ jobs:
     steps:
       - name: Informações de execução
         run: |
-          Write-Output " Executado por: ${{ github.actor }}"
-          Write-Output "Sistema operacional: ${{ runner.os }}"
+          Write-Output "[INFO] Executado por: ${{ github.actor }}"
+          Write-Output "[INFO] Sistema operacional: ${{ runner.os }}"
 
       - name: Deploy para ambiente DEV
         run: |
-          Write-Output "Iniciando publicação em ambiente de desenvolvimento"
-          Write-Output "ENV_TYPE (dev): ${{ vars.ENV_TYPE }}"
-          Write-Output "Deploy DEV Concluído"
+          Write-Output "[DEPLOY] Iniciando publicação em ambiente de desenvolvimento"
+          Write-Output "[DEPLOY] ENV_TYPE (dev): ${{ vars.ENV_TYPE }}"
+          Write-Output "[SUCCESS] Deploy DEV concluído com sucesso"
 
   deploy-ambiente-prod:
     if: github.ref == 'refs/heads/main'
@@ -40,11 +40,11 @@ jobs:
     steps:
       - name: Informações de execução
         run: |
-          Write-Output "🔧 Executado por: ${{ github.actor }}"
-          Write-Output "🖥️ Sistema operacional: ${{ runner.os }}"
+          Write-Output "[INFO] Executado por: ${{ github.actor }}"
+          Write-Output "[INFO] Sistema operacional: ${{ runner.os }}"
 
       - name: Deploy para ambiente PROD
         run: |
-          Write-Output "Iniciando processo de publicação em produção"
-          Write-Output "Token de acesso: ${{ secrets.PROD_KEY }}"
-          Write-Output "Aguardando confirmação para finalizar deploy PROD"
+          Write-Output "[DEPLOY] Iniciando publicação no ambiente de produção"
+          Write-Output "[SECURE] Token de acesso: ${{ secrets.PROD_KEY }}"
+          Write-Output "[PENDING] Aguardando aprovação para finalizar deploy PROD"
