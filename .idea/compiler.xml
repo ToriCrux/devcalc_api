@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="devcalc_api_main" />
+        <module name="devcalc-api" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

@@ -26,4 +26,14 @@ public class CalculatorServiceTest {
     void testDivide() {
         assertEquals(2, calc.divide(10, 5));
     }
+
+    @Test
+    void testSquareRoot() {
+        assertEquals(4.0, calc.squareRoot(16), 0.0001);
+    }
+
+    @Test
+    void testSquareRootNegative() {
+        assertThrows(IllegalArgumentException.class, () -> calc.squareRoot(-9));
+    }
 }

@@ -34,5 +34,17 @@ public class Main {
                 ctx.result(String.valueOf(calculator.divide(a, b)));
             }
         });
+
+        app.get("/sqrt", ctx -> {
+            try {
+                double x = Double.parseDouble(ctx.queryParam("x"));
+                double result = calculator.squareRoot(x);
+                ctx.result(String.valueOf(result));
+            } catch (NumberFormatException e) {
+                ctx.status(400).result("Parâmetro 'x' inválido.");
+            } catch (IllegalArgumentException e) {
+                ctx.status(400).result(e.getMessage());
+            }
+        });
     }
 }
