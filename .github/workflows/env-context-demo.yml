@@ -1,0 +1,27 @@
+name: Contextos e Escopos de Variáveis
+
+on:
+  workflow_dispatch:
+
+env:
+  STAGE: ambiente-global
+
+jobs:
+  demo-escopos:
+    runs-on: self-hosted
+    env:
+      STAGE: ambiente-job
+
+    steps:
+      - name: Informações do GitHub e Runner
+        run: |
+          echo Executado por: ${{ github.actor }}
+          echo SO utilizado no runner: ${{ runner.os }}
+
+      - name: Valor da variável STAGE no job
+        run: 'echo Valor atual de STAGE no job: $env:STAGE'
+
+      - name: Redefinindo STAGE apenas neste step
+        env:
+          STAGE: ambiente-step
+        run: 'echo STAGE neste step: $env:STAGE'
